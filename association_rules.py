@@ -31,7 +31,10 @@ def csv2LISTDICT(file_arg):
 	return table_list
 #####################################
 def freqCOUNT(table,reviewCount):
-
+	# Iterates through all reviews and determines whether or not the 
+	# review was positive or negative as determined by the class variable
+	#  isPositive or isNegative
+	
 	#	Local Variables
 	bag_of_words = ''
 	binFeatHeadings = []
@@ -80,22 +83,10 @@ def grepString(text):
 	# Will take a review and return all words in that review, separated
 	review_vector = re.findall(r'\w+',text,flags=re.I)
 	return review_vector
-	
-#####################################
-def generateruleCOMBOS(headers):
-	level_result = []
-	
-	for i in range(3):
-		temp_list = []
-		level = itertools.combinations(headers, i+1)
-		for j in level:
-			temp_list.append(list(j))
-		level_result.append(temp_list)
-			
-	return level_result
 
 #####################################
 def freqItemSetGen(colHeadings,featMTRX,support_percnt):
+	# My implementation of the Apriori association rule algorithm
 	
 	worst = 0
 	isNegative = 0
@@ -277,7 +268,8 @@ def freqItemSetGen(colHeadings,featMTRX,support_percnt):
 
 #####################################			
 def ruleGen(colHeadings,featMTRX,itemsets,conf_percnt):
-	# Will generate final rule sets
+	# Function to generate final rule sets
+	
 	finalRule = {}
 	
 	for i in range(1,len(itemsets)):
@@ -362,6 +354,7 @@ def ruleGen(colHeadings,featMTRX,itemsets,conf_percnt):
 	
 def sortedDict(ruleDict,support_return):
 	# Sorts a dictionary for output
+	
 	count = 0
 	for key,value in sorted(ruleDict.iteritems(),key=lambda (k,v): (v,k),reverse=True):
     		count += 1
